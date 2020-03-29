@@ -1,0 +1,34 @@
+{
+  "name": "buscapramim_api",
+  "version": "1.0.0",
+  "description": "This api was made to help find people which need help buying their stuff",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipefanucchi/buscapramim_api.git"
+  },
+  "keywords": [
+    "api",
+    "nodejs",
+    "express",
+    "ecma",
+    "es6",
+    "es7",
+    "es8",
+    "rest",
+    "restful"
+  ],
+  "author": "Felipe Fanucchi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felipefanucchi/buscapramim_api/issues"
+  },
+  "homepage": "https://github.com/felipefanucchi/buscapramim_api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
