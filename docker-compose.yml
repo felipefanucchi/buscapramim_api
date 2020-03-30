@@ -10,7 +10,7 @@ services:
       - ./:/home/node/app
 
   db:
-    image: postgres:11-alpine
+    image: postgres:12-alpine
     ports:
       - 55432:5432
     environment:
