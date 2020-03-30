@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+
+  node:
+    build: docker/
+    ports:
+      - 3333:3333
+    volumes:
+      - ./:/home/node/app
