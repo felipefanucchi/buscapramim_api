@@ -8,3 +8,11 @@ services:
       - 3333:3333
     volumes:
       - ./:/home/node/app
+
+  db:
+    image: postgres:11-alpine
+    ports:
+      - 55432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: buscapramim
