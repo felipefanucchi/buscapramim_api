@@ -13,6 +13,6 @@ WORKDIR /home/node/app
 
 USER node
 
-RUN yarn global add nodemon
+RUN yarn global add nodemon knex
 
 CMD sleep 360h
