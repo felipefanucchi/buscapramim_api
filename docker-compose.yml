@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+
+  node:
+    build: docker/
+    ports:
+      - 3333:3333
+    volumes:
+      - ./:/home/node/app
+
+  db:
+    image: postgres:12-alpine
+    ports:
+      - 55432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: buscapramim
