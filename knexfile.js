@@ -1,14 +1,16 @@
 // Update with your config settings.
 
 module.exports = {
-
   development: {
     client: 'pg',
     connection: {
-      filename: process.env.DB_URL
+      host: '127.0.0.1',
+      user: 'dev',
+      password: 'dev',
+      database: 'buscapramim'
     },
     migrations: {
-      directory: __dirname+ './src/database/migrations/'
+      directory: './src/database/migrations/'
     }
   },
 
