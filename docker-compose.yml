@@ -10,9 +10,10 @@ services:
       - ./:/home/node/app
 
   db:
-    image: postgres:12-alpine
+    image: postgis/postgis:12-3.0-alpine
     ports:
-      - 55432:5432
+      - 56432:5432
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: postgres
       POSTGRES_DB: buscapramim
