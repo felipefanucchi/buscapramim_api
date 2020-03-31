@@ -28,9 +28,11 @@
   },
   "homepage": "https://github.com/felipefanucchi/buscapramim_api#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "joi-phone-number": "^4.1.0",
     "knex": "^0.20.13",
     "knex-postgis": "^0.11.0",
     "nodemon": "^2.0.2",
