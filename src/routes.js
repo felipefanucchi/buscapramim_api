@@ -1,19 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./database/db');
-
 // Controllers
-router.get('/', async (request, response) => {
-  const {name, description} = request.body;
-  const {user_id} = request.headers;
+const RegisterController = require('./controllers/RegisterController');
 
-  const user = {
-    name,
-    description,
-    user_id: parseInt(user_id)
-  };
-
-  return response.json({ user });
-});
+router.post('/register', RegisterController.create);
 
 module.exports = router;

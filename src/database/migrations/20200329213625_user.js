@@ -4,6 +4,7 @@ exports.up = function(knex) {
     table.increments();
     table.string('name').notNullable();
     table.string('email').notNullable();
+    table.text('password').notNullable();
     table.string('phone').notNullable();
     table.specificType('coordinates', 'geometry(point, 4326)');
   });

@@ -1,6 +1,5 @@
 require('dotenv').config({path: __dirname+'/.env'});
 
-
 module.exports = {
   development: {
     client: process.env.DB_CLIENT,
