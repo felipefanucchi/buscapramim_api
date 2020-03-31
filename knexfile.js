@@ -1,13 +1,14 @@
-// Update with your config settings.
+require('dotenv').config({path: __dirname+'/.env'});
+
 
 module.exports = {
   development: {
-    client: 'pg',
+    client: process.env.DB_CLIENT,
     connection: {
-      host: '127.0.0.1',
-      user: 'dev',
-      password: 'dev',
-      database: 'buscapramim'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
     },
     migrations: {
       directory: './src/database/migrations/'
@@ -15,15 +16,16 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client: process.env.DB_CLIENT,
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
     },
     pool: {
-      min: 2,
-      max: 10
+      min: process.env.DB_POOL_MIN,
+      max: process.env.DB_POOL_MAX
     },
     migrations: {
       tableName: 'knex_migrations'
@@ -31,15 +33,16 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: process.env.DB_CLIENT,
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
     },
     pool: {
-      min: 2,
-      max: 10
+      min: process.env.DB_POOL_MIN,
+      max: process.env.DB_POOL_MAX
     },
     migrations: {
       directory: __dirname+ './src/database/migrations/'
