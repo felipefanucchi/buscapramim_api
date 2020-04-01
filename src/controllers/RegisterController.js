@@ -27,11 +27,11 @@ module.exports = {
 
     if (emailExists) response.status(400).json({error: 'E-mail already registered.'});
 
-    const salt = await bcrypt.gentSalt(10);
+    const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
     try {
-      const user = await db('users').insert({
+      await db('users').insert({
         name,
         email,
         phone,
@@ -39,10 +39,16 @@ module.exports = {
         coordinates: st.setSRID(st.geomFromText(`Point(${longitude} ${latitude})`), 4326)
       });
 
+      const { id } = await db('users')
+        .where('users.email', email)
+        .select('users.id')
+        .first();
+      
       // let users = await db('users').select([
       //   'users.name',
       //   'users.email',
       //   'users.phone',
+      //   'users.password',
       //   st.x('coordinates').as('longitude'),
       //   st.y('coordinates').as('latitude')
       // ]);
@@ -55,7 +61,7 @@ module.exports = {
       //   return user;
       // });
 
-      return response.json({ user });
+      return response.json({ user: id });
     } catch(err) {
       return response.status(400).send(err);
     }
