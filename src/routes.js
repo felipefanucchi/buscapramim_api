@@ -4,11 +4,14 @@ const router = express.Router();
 const RegisterController = require('./controllers/RegisterController');
 const LoginController = require('./controllers/LoginController');
 const ProfileController = require('./controllers/ProfileController');
-// Middleware
+const ForgotPasswordController = require('./controllers/ForgotPasswordController');
+// Middlewares
 const verifyToken = require('./middlewares/verifyToken');
-
+//POST
 router.post('/register', RegisterController.create);
 router.post('/login', LoginController.create);
+router.post('/forgot-password', ForgotPasswordController.create);
+//GET
 router.get('/profile', verifyToken, ProfileController.index);
 
 module.exports = router;
