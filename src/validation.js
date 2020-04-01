@@ -12,8 +12,6 @@ const registerValidation = data => {
     ).description("Please use this format [ longitude, latitude ]"),
   });
 
-  console.log(schema.validate(data));
-
   return schema.validate(data);
 };
 
