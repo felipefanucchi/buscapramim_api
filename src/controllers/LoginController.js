@@ -1,5 +1,6 @@
 const db = require('../database/db');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { loginValidation } = require('../validation');
 
 module.exports = {
@@ -21,9 +22,9 @@ module.exports = {
     if (!user) response.status(400).json({error: 'Email is not found.'});
 
     const validPass = await bcrypt.compare(password, user.password);
-
     if (!validPass) return response.status(400).json({error: 'Password is wrong'});
 
-    return response.json({user})
+    const token = jwt.sign({_id: user.id}, process.env.TOKEN_SECRET);
+    return response.header('auth-token', token).json({token});
   }
 }

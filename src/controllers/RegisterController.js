@@ -43,23 +43,6 @@ module.exports = {
         .where('users.email', email)
         .select('users.id')
         .first();
-      
-      // let users = await db('users').select([
-      //   'users.name',
-      //   'users.email',
-      //   'users.phone',
-      //   'users.password',
-      //   st.x('coordinates').as('longitude'),
-      //   st.y('coordinates').as('latitude')
-      // ]);
-
-      // users = users.map(user => { 
-      //   user.coordinates = [ user.longitude, user.latitude ];
-      //   delete user.longitude;
-      //   delete user.latitude;
-
-      //   return user;
-      // });
 
       return response.json({ user: id });
     } catch(err) {
