@@ -1,6 +1,7 @@
 const db = require('../database/db');
 const knexPostgis = require('knex-postgis');
 const st = knexPostgis(db);
+const bcrypt = require('bcryptjs');
 const { registerValidation } = require('../validation');
 
 module.exports = {
@@ -24,16 +25,17 @@ module.exports = {
       .select('*')
       .first();
 
-    console.log(emailExists);
-
     if (emailExists) response.status(400).json({error: 'E-mail already registered.'});
 
+    const salt = await bcrypt.gentSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
+
     try {
-      await db('users').insert({
+      const user = await db('users').insert({
         name,
         email,
         phone,
-        password,
+        password: hashPassword,
         coordinates: st.setSRID(st.geomFromText(`Point(${longitude} ${latitude})`), 4326)
       });
 
@@ -53,7 +55,7 @@ module.exports = {
       //   return user;
       // });
 
-      return response.status(204);
+      return response.json({ user });
     } catch(err) {
       return response.status(400).send(err);
     }
