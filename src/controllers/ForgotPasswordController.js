@@ -8,7 +8,7 @@ module.exports = {
 
     console.log(email);
 
-    const user = db('users')
+    const user = await db('users')
       .where('users.email', email)
       .select('*')
       .first(); 
