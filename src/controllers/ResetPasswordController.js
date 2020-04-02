@@ -6,7 +6,7 @@ module.exports = {
   async update(request, response) {
     const { error } = resetPasswordValidation(request.body);
 
-    if (error) return response.status(400).send({error});
+    if (error) return response.status(400).send({error: error.details[0].message});
 
     const { email, password } = request.body;
     const token = request.headers['reset-token'];

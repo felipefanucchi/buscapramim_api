@@ -7,7 +7,7 @@ module.exports = {
   async create(request, response) {
     const { error } = loginValidation(request.body);
 
-    if (error) return response.status(400).send({error});
+    if (error) return response.status(400).send({error: error.details[0].message});
 
     const {
       email,

@@ -26,7 +26,7 @@ const loginValidation = data => {
 
 const forgotPasswordValidation = data => {
   const schema = Joi.object({
-    password: Joi.string().min(6).required(),
+    email: Joi.string().min(6).required(),
   });
 
   return schema.validate(data);
