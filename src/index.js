@@ -14,8 +14,8 @@ let swaggerOptions = {
       title: "Busca pra mim API",
       version: '1.0.0',
     },
-    host: 'localhost:'+process.env.API_PORT | 3333,
-    basePath: 'api/v1',
+    host: 'localhost:3333',
+    basePath: '/',
     produces: [
       "application/json",
     ],
