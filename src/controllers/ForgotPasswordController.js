@@ -27,24 +27,20 @@ module.exports = {
           password_reset_expires: now,
         });
 
-      mailer.sendMail({
+      await mailer.sendMail({
         to: email,
         from: 'flfanucchi@gmail.com',
         template: '../mail/forgot-password',
         context: { token },
       }, err => {
         if (err) {
-          console.log(err);
-          return response.status(400).json({ error: 'Error on sending the forgot password email, please try again later.' })
+          return response.status(400).send({ error: 'Error on sending the forgot password email, please try again later.' })
         }
 
-        return response.status(204);
+        return response.status(204).send();
       });
-
     } catch(err) {
-      console.log(err);
-
-      response.json({error: 'Error on forgot password, try again!'});
+      return response.json({error: 'Error on forgot password, try again!'});
     }
   }
 }
