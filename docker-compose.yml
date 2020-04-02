@@ -8,12 +8,39 @@ services:
       - 3333:3333
     volumes:
       - ./:/home/node/app
+    networks:
+      - buscapramim_dev
 
   db:
     image: postgis/postgis:12-3.0-alpine
     ports:
       - 56432:5432
     environment:
-      POSTGRES_PASSWORD: example
-      POSTGRES_USER: postgres
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
       POSTGRES_DB: buscapramim
+    networks:
+      - buscapramim_dev
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 29000:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@dev.dev
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - db
+    networks:
+      - buscapramim_dev
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - buscapramim_dev
+
+networks:
+  buscapramim_dev:
