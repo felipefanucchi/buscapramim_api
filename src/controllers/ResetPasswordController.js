@@ -11,15 +11,11 @@ module.exports = {
     const { email, password } = request.body;
     const token = request.headers['reset-token'];
 
-    console.log(email, token, password);
-
     try {
       const user = await db('users')
         .where({ email })
         .select('password_reset_token', 'password_reset_expires')
         .first();
-
-      console.log(user);
 
       if (!user) return response.status(400).send({error: 'This email does not exist in our database.' })
 
