@@ -50,6 +50,12 @@ Execute as migrations do banco de dados:
 knex migrate:latest
 ```
 
+Execute o seeder do primeiro usuario do sistema:
+
+```bash
+knex seed:run
+```
+
 #### Iniciando o servidor de desenvolvimento
 
 Para iniciar o servidor de desenvolvimento com o Docker, basta abrir uma nova sessão do terminal na sua máquina e digitar:
