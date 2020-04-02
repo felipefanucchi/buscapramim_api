@@ -2,9 +2,9 @@
 
 ## Sumário
 
-1. [Configurando ambiente de desenvolvimento](#Configurando o ambiente de desenvolvimento)
-1.1 [Docker](#Docker)
-2. [Documentação da API](#Documentação da API)
+* [Configurando ambiente de desenvolvimento](#Configurando o ambiente de desenvolvimento)
+  * [Docker](#Docker)
+* [Documentação da API](#Documentação da API)
 
 
 ## Configurando o ambiente de desenvolvimento
