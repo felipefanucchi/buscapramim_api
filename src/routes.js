@@ -12,7 +12,8 @@ const verifyToken = require('./middlewares/verifyToken');
 router.post('/register', RegisterController.create);
 router.post('/login', LoginController.create);
 router.post('/forgot_password', ForgotPasswordController.create);
-router.post('/reset_password', ResetPasswordController.create);
+// PUT
+router.put('/reset_password', ResetPasswordController.update);
 //GET
 router.get('/profile', verifyToken, ProfileController.index);
 

@@ -7,7 +7,7 @@ module.exports = {
   async create(request, response) {
     const { error } = loginValidation(request.body);
 
-    if (error) return response.status(400).json({error});
+    if (error) return response.status(400).send({error});
 
     const {
       email,
@@ -19,10 +19,10 @@ module.exports = {
       .select('*')
       .first();
 
-    if (!user) response.status(400).json({error: 'Email is not found.'});
+    if (!user) response.status(400).send({error: 'Email is not found.'});
 
     const validPass = await bcrypt.compare(password, user.password);
-    if (!validPass) return response.status(400).json({error: 'Password is wrong'});
+    if (!validPass) return response.status(400).send({error: 'Password is wrong'});
 
     const token = jwt.sign({_id: user.id}, process.env.TOKEN_SECRET);
     return response.header('auth-token', token).json({token});

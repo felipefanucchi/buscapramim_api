@@ -9,6 +9,6 @@ module.exports = function(request, response, next) {
     request.user = verified;
     next();
   } catch (err) {
-    return response.status(400).json({error: 'Invalid token!'});
+    return response.status(400).send({error: 'Invalid token!'});
   }
 }

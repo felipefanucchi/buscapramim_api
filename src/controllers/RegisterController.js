@@ -8,7 +8,7 @@ module.exports = {
   async create(request, response) {
     const { error } = registerValidation(request.body);
 
-    if (error) return response.status(400).json({error});
+    if (error) return response.status(400).send({error});
 
     const {
       name,
@@ -25,7 +25,7 @@ module.exports = {
       .select('*')
       .first();
 
-    if (emailExists) response.status(400).json({error: 'E-mail already registered.'});
+    if (emailExists) response.status(400).send({error: 'E-mail already registered.'});
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);

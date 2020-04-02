@@ -1,10 +1,14 @@
 const db = require('../database/db');
 const crypto = require('crypto');
 const mailer = require('../modules/mailer');
-const jwt = require('jsonwebtoken');
+const { forgotPasswordValidation } = require('../validation');
 
 module.exports = {
   async create(request, response) {
+    const { error } = forgotPasswordValidation(request.body);
+
+    if (error) return response.status(400).send({error});
+
     const { email } = request.body;
 
     try {
@@ -13,7 +17,7 @@ module.exports = {
         .select('*')
         .first(); 
 
-      if (!user) return response.status(400).json({error: 'This email does not exist in our database.'});
+      if (!user) return response.status(400).send({error: 'This email does not exist in our database.'});
 
       const token = crypto.randomBytes(20).toString('HEX');
 
