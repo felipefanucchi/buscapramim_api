@@ -2,14 +2,25 @@ const db = require('../database/db');
 const bcrypt = require('bcryptjs');
 const { resetPasswordValidation } = require('../validation');
 
+/**
+ * @route PUT /reset_password
+ * @group user - Operações para usuários
+ * @param {string} body.required - Dados do usuario para redefinir a senha. - Exemplo: "a@a.com.br", "password": "password", "reset_token": "fkZwAUKPS9sZaVX6IvDp6ikPa8eUqMxE"}
+ * @type {{create(*, *): Promise<*|undefined>}}
+ * @returns {object} 400 - O email nao foi encontrado no banco de dados.
+ * @returns {object} 400 - Token invalido.
+ * @returns {object} 400 - Token expirado.
+ * @returns {object} 400 - Nao foi possivel redefinir a senha, tente novamente.
+ * @returns {object} 200 - Sucesso.
+ */
 module.exports = {
   async update(request, response) {
     const { error } = resetPasswordValidation(request.body);
 
     if (error) return response.status(400).send({error: error.details[0].message});
 
-    const { email, password } = request.body;
-    const token = request.headers['reset-token'];
+    const { email, password, reset_token } = request.body;
+    const token = reset_token; //request.headers['reset-token'];
 
     try {
       const user = await db('users')
