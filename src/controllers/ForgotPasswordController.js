@@ -1,8 +1,18 @@
+require('dotenv').config({path: __dirname+'/.env'});
 const db = require('../database/db');
 const crypto = require('crypto');
 const mailer = require('../modules/mailer');
 const { forgotPasswordValidation } = require('../validation');
 
+/**
+ * @route POST /forgot_password
+ * @group user - Operações para usuários
+ * @param {string} email.body.required - E-mail do usuário - Exemplo: a@a.com.br
+ * @type {{create(*, *): Promise<*|undefined>}}
+ * @returns {object} 400 - Um erro ao tentar enviar o email.
+ * @returns {object} 204 - O email foi enviado.
+ * @returns {object} 200 - Ocorreu um erro ao tentar redefinir a senha.
+ */
 module.exports = {
   async create(request, response) {
     const { error } = forgotPasswordValidation(request.body);
@@ -15,7 +25,7 @@ module.exports = {
       const user = await db('users')
         .where('users.email', email)
         .select('*')
-        .first(); 
+        .first();
 
       if (!user) return response.status(400).send({error: 'This email does not exist in our database.'});
 
@@ -33,7 +43,7 @@ module.exports = {
 
       await mailer.sendMail({
         to: email,
-        from: 'flfanucchi@gmail.com',
+        from: process.env.MAILER_FROM_EMAIL,
         template: '../mail/forgot-password',
         context: { token },
       }, err => {
@@ -47,4 +57,4 @@ module.exports = {
       return response.json({error: 'Error on forgot password, try again!'});
     }
   }
-}
+};
