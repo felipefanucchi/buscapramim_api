@@ -25,6 +25,6 @@ module.exports = {
     if (!validPass) return response.status(400).send({error: 'Password is wrong'});
 
     const token = jwt.sign({_id: user.id}, process.env.TOKEN_SECRET);
-    return response.header('auth-token', token).json({token});
+    return response.header('Authorization', token).json({token});
   }
 }

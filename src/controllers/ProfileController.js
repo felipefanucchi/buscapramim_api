@@ -33,13 +33,14 @@ module.exports = {
       name,
       phone,
       available,
-      address_complement 
+      address_complement,
+      first_login
     } = request.body;
 
     try {
       await db('users')
         .where('users.id', id)
-        .update({ name, phone, available, address_complement });
+        .update({ name, phone, available, address_complement, first_login });
 
       return response.json({ message: 'Profile updated' });
     } catch(err) {

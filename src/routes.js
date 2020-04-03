@@ -6,16 +6,21 @@ const LoginController = require('./controllers/LoginController');
 const ProfileController = require('./controllers/ProfileController');
 const ForgotPasswordController = require('./controllers/ForgotPasswordController');
 const ResetPasswordController = require('./controllers/ResetPasswordController');
+const ProductController = require('./controllers/ProductController');
+const UserNeedController = require('./controllers/UserNeedController');
 // Middlewares
 const verifyToken = require('./middlewares/verifyToken');
-//POST
+
 router.post('/register', RegisterController.create);
 router.post('/login', LoginController.create);
 router.post('/forgot_password', ForgotPasswordController.create);
-// PUT
 router.put('/reset_password', ResetPasswordController.update);
-//GET
+
 router.get('/profile', verifyToken, ProfileController.index);
 router.put('/profile', verifyToken, ProfileController.update);
+
+router.post('/product', verifyToken, ProductController.create);
+
+router.get('/user_need', verifyToken, UserNeedController.index);
 
 module.exports = router;
