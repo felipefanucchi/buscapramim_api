@@ -8,6 +8,9 @@ exports.up = function(knex) {
     table.string('password_reset_token');
     table.string('password_reset_expires');
     table.string('phone').notNullable();
+    table.boolean('available').defaultTo(true);
+    table.boolean('first_login').defaultTo(true);
+    table.text('address_complement');
     table.specificType('coordinates', 'geometry(point, 4326)');
   });
 };

@@ -16,5 +16,6 @@ router.post('/forgot_password', ForgotPasswordController.create);
 router.put('/reset_password', ResetPasswordController.update);
 //GET
 router.get('/profile', verifyToken, ProfileController.index);
+router.put('/profile', verifyToken, ProfileController.update);
 
 module.exports = router;
