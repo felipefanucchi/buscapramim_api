@@ -14,7 +14,7 @@ module.exports = {
         .select(
           'u.id AS _id',
           'u.name AS _name',
-          'u.address_complement AS _complement',
+          'u.address_complement AS _addressComplement',
           st.x('coordinates').as('_longitude'),
           st.y('coordinates').as('_latitude'),
           'p.name AS _products__name',
@@ -24,7 +24,7 @@ module.exports = {
         .from('users AS u')
         .join('products AS p', 'u.id', '=' ,'p.user_id');
 
-      let users = await knexnest(query)
+      let users = await knexnest(query);
 
       users = users.map(user => {
         user.coordinates = [ user.longitude, user.latitude ];
