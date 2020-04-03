@@ -1,6 +1,7 @@
 const db = require('../database/db');
 const knexPostgis = require('knex-postgis');
 const st = knexPostgis(db);
+const knexnest = require('knexnest');
 
 module.exports = {
   async index(request, response) {
@@ -9,25 +10,21 @@ module.exports = {
     try {
       const [count] = await db('products').count();
 
-      let users = await db('users')
-        .limit(10)
-        .offset((page - 1) * 10)
-        .select([
-          'users.id',
-          'users.name',
-          'users.address_complement',
-          st.x('coordinates').as('longitude'),
-          st.y('coordinates').as('latitude'),
-        ]);
+      const query = db
+        .select(
+          'u.id AS _id',
+          'u.name AS _name',
+          'u.address_complement AS _complement',
+          st.x('coordinates').as('_longitude'),
+          st.y('coordinates').as('_latitude'),
+          'p.name AS _products__name',
+          'p.description AS _products__description',
+          'p.quantity AS _products__quantity'
+        )
+        .from('users AS u')
+        .join('products AS p', 'u.id', '=' ,'p.user_id');
 
-      const products = await db('products')
-        .limit(10)
-        .offset((page - 1) * 10)
-        .select([
-          'products.user_id',
-          'products.name',
-          'products.description',
-        ]);
+      let users = await knexnest(query)
 
       users = users.map(user => {
         user.coordinates = [ user.longitude, user.latitude ];
@@ -37,20 +34,11 @@ module.exports = {
         return user;
       });
 
-      users.forEach(user => user.products = []);
-
-      products.forEach(product => {
-        users.forEach(user => {
-          if (product.user_id === user.id) {
-           user.products.push(product);
-          }
-        });
-      });
-
       response.header('X-Total-Count', count['count']);
 
       return response.json({ users });
     } catch(err) {
+      console.log(err);
       return response.status(400).send({error: 'Error while listing the products/users, try again later.'})
     } 
   }
