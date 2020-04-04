@@ -8,8 +8,6 @@ module.exports = {
     const { page = 1 } = request.query;
 
     try {
-      const [count] = await db('products').count();
-
       const query = db
         .select(
           'u.id AS _id',
@@ -21,9 +19,18 @@ module.exports = {
           'p.description AS _products__description',
           'p.quantity AS _products__quantity'
         )
-        .from('users AS u')
-        .join('products AS p', 'u.id', '=' ,'p.user_id');
-
+        .from(builder => {
+          builder.select('*').from('users').offset((page - 1) * 10).limit(10).as('u')
+        })
+        .join(
+          builder => {
+            builder.select('*').from('products').as('p');
+          },
+          function() {
+            this.on('p.user_id', '=', 'u.id')
+          }
+        );
+      
       let users = await knexnest(query);
 
       users = users.map(user => {
@@ -33,8 +40,6 @@ module.exports = {
         delete user.latitude;  
         return user;
       });
-
-      response.header('X-Total-Count', count['count']);
 
       return response.json({ users });
     } catch(err) {
