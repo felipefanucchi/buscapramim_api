@@ -15,7 +15,7 @@
 Inicie a construção dos containers necessários utilizando o docker-compose
 
 ```bash
-docker-compose up --d --build --force-recreate
+docker-compose up -d --build --force-recreate
 ``` 
 
 A imagem base para o Node será construída caso não exista.
