@@ -5,36 +5,25 @@ const knexnest = require('knexnest');
 
 module.exports = {
   async index(request, response) {
-    const { page = 1 } = request.query;
+    let {long: longitude, lat: latitude, radius } = request.query;
 
     try {
-      const [count] = await db('products').count();
-
       const query = db
         .select(
           'u.id AS _id',
           'u.name AS _name',
           'u.address_complement AS _addressComplement',
-          st.x('coordinates').as('_longitude'),
-          st.y('coordinates').as('_latitude'),
+          st.distance('coordinates', st.geography(st.makePoint(longitude, latitude))).as('_distanceAway'),
           'p.name AS _products__name',
           'p.description AS _products__description',
           'p.quantity AS _products__quantity'
         )
+        .where(st.dwithin('coordinates', st.geography(st.makePoint(longitude, latitude)), radius))
         .from('users AS u')
         .join('products AS p', 'u.id', '=' ,'p.user_id');
 
       let users = await knexnest(query);
 
-      users = users.map(user => {
-        user.coordinates = [ user.longitude, user.latitude ];
-
-        delete user.longitude;
-        delete user.latitude;  
-        return user;
-      });
-
-      response.header('X-Total-Count', count['count']);
 
       return response.json({ users });
     } catch(err) {
