@@ -7,6 +7,8 @@ module.exports = {
   async index(request, response) {
     let {long: longitude, lat: latitude, radius } = request.query;
 
+    radius = radius / 1.60934; // Kilometers To Miles
+
     try {
       const query = db
         .select(
@@ -24,6 +26,10 @@ module.exports = {
 
       let users = await knexnest(query);
 
+      users = users.map(user => {
+        user.distanceAway = user.distanceAway * 1.60934; // Miles To Kilometers
+        return user;
+      })
 
       return response.json({ users });
     } catch(err) {
