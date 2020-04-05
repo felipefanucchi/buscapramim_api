@@ -4,6 +4,7 @@ exports.up = function(knex) {
     table.increments();
     table.string('name').notNullable();
     table.text('description');
+    table.integer('quantity').defaultTo(1);
     table.integer('user_id').notNullable();
     table.foreign('user_id').references('id').inTable('users');
   });

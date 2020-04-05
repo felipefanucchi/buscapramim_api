@@ -6,7 +6,7 @@ const { forgotPasswordValidation } = require('../validation');
 
 /**
  * @route POST /forgot_password
- * @group user - Operações para usuários
+ * @group User - Operações para usuários
  * @param {string} email.body.required - E-mail do usuário. Exemplo: {"email": "a@a.com.br"}
  * @type {{create(*, *): Promise<*|undefined>}}
  * @returns {object} 400 - Um erro ao tentar enviar o email.
