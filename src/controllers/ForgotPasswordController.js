@@ -44,7 +44,7 @@ module.exports = {
       await mailer.sendMail({
         to: email,
         from: process.env.MAILER_FROM_EMAIL,
-        template: '../mail/forgot-password',
+        template: '../mail/reset-password',
         context: { token },
       }, err => {
         if (err) {
