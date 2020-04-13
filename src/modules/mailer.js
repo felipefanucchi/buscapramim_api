@@ -8,7 +8,7 @@ const handlebarsOptions = {
     extName: '.html',
     partialsDir: path.resolve('./src/templates/mail/'),
     layoutsDir: path.resolve('./src/templates/mail/'),
-    defaultLayout: 'resetcss-class="text"-password.html'
+    defaultLayout: 'reset-password.html'
   },
   viewPath: path.resolve('./src/templates/mail/'),
   extName: '.html'
