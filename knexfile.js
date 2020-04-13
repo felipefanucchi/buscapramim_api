@@ -44,7 +44,7 @@ module.exports = {
       max: process.env.DB_POOL_MAX
     },
     migrations: {
-      directory: __dirname+ './src/database/migrations/'
+      directory: __dirname+ '/src/database/migrations/'
     }
   }
 
