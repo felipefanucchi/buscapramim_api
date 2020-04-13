@@ -4,7 +4,8 @@
   "description": "This api was made to help find people which need help buying their stuff",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
