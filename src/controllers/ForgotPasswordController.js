@@ -45,7 +45,7 @@ module.exports = {
         to: email,
         from: process.env.MAILER_FROM_EMAIL,
         template: '../mail/reset-password',
-        context: { token },
+        context: { token, email },
       }, err => {
         if (err) {
           return response.status(400).send({ error: 'Error on sending the forgot password email, please try again later.' })
