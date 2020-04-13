@@ -33,7 +33,9 @@ module.exports = {
       if (token !== user.password_reset_token) return response.status(400).send({error: 'Invalid token' });
 
       const now = new Date();
-      if (now > user.password_reset_expires) return response.status(400).send({error: 'Expired token, generate a new one' });
+      const userDate = new Date(user.password_reset_expires);
+
+      if (now > userDate) return response.status(400).send({error: 'Expired token, generate a new one' });
 
       const salt = await bcrypt.genSalt(10);
       const hashPassword = await bcrypt.hash(password, salt);
@@ -44,6 +46,7 @@ module.exports = {
 
       return response.json({message: 'Password changed.'})
     } catch (err) {
+      console.log(err);
       return response.status(400).send({ error: 'Cannot reset password, try again' });
     }
   }
