@@ -11,6 +11,8 @@ RUN mkdir -p /home/node/app
 
 WORKDIR /home/node/app
 
+COPY . . 
+
 USER node
 
 RUN yarn global add nodemon knex
