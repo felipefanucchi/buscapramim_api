@@ -9,7 +9,7 @@ module.exports = {
       const [count] = await db('users as u').whereNot('u.id', id).where('u.available', true).count();
 
       const query = await db.raw(
-        `SELECT * 
+        `SELECT name, email, phone, address_complement 
         FROM users as u 
         WHERE u.available = true AND u.id <> ${id}
         LIMIT 10
