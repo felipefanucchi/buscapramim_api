@@ -23,6 +23,7 @@ router.put('/profile', verifyToken, ProfileController.update);
 
 router.post('/product', verifyToken, ProductController.create);
 router.delete('/product/:product_id', verifyToken, ProductController.delete);
+router.get('/product', verifyToken, ProductController.index);
 
 router.get('/user_need', verifyToken, UserNeedController.index);
 router.get('/available_user', verifyToken, AvailableUserController.index);

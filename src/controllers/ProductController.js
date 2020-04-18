@@ -37,8 +37,12 @@ module.exports = {
     }
   },
   async index(request, response) {
-    const products = await db('products').select('*');
+    const { _id: id } = request.user;
 
-    return response.send({ products });
+    const products = await db('products')
+      .select('*')
+      .where('user_id', id);
+
+    return response.json({ products });
   }
 }
