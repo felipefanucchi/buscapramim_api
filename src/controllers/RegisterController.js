@@ -25,7 +25,10 @@ module.exports = {
       .select('*')
       .first();
 
-    if (emailExists) response.status(400).send({error: 'E-mail already registered.'});
+    if (emailExists) {
+      response.status(400).send({error: 'E-mail already registered.'});
+      return;
+    };
 
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
