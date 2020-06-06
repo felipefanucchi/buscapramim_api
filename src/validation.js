@@ -5,7 +5,7 @@ const registerValidation = data => {
     name: Joi.string().min(6).required(),
     email: Joi.string().min(6).required().email(),
     password: Joi.string().min(6).required(),
-    phone: Joi.string().min(10).max(11),
+    phone: Joi.string().min(14).max(15),
     coordinates: Joi.array().ordered(
       Joi.number().min(-90).max(90).required(),
       Joi.number().min(-180).max(180).required()

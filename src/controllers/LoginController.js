@@ -19,10 +19,12 @@ module.exports = {
       .select('*')
       .first();
 
-    if (!user) response.status(400).send({error: 'Email is not found.'});
-
-    const validPass = await bcrypt.compare(password, user.password);
-    if (!validPass) return response.status(400).send({error: 'Password is wrong'});
+    if (!user) response.status(400).send({error: 'Wrong email or password'});
+    
+    if (password) {
+      const validPass = await bcrypt.compare(password, user.password);
+      if (!validPass) return response.status(400).send({error: 'Wrong email or password'});
+    }
 
     const token = jwt.sign({_id: user.id}, process.env.TOKEN_SECRET);
     return response.header('Authorization', token).json({token});
