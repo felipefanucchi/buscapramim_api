@@ -17,7 +17,8 @@ module.exports = {
           'u.name AS _name',
           'u.phone AS _phone',
           'u.address_complement AS _addressComplement',
-          st.distance('coordinates', st.geography(st.makePoint(longitude, latitude))).as('_distanceAway'),
+          st.x('coordinates').as('_longitude'), 
+          st.y('coordinates').as('_latitude'),
           'p.name AS _products__name',
           'p.description AS _products__description',
           'p.quantity AS _products__quantity'
@@ -30,11 +31,6 @@ module.exports = {
       let users = await knexnest(query);
 
       if (!users) return response.status(200).send({users: []})
-
-      users = users.map(user => {
-        user.distanceAway = user.distanceAway * 1.60934; // Miles To Kilometers
-        return user;
-      })
 
       return response.json({ users });
     } catch(err) {
