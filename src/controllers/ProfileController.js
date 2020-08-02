@@ -34,13 +34,32 @@ module.exports = {
       phone,
       available,
       address_complement,
-      first_login
+      first_login,
+      coordinates
     } = request.body;
+
+    const toUpdate = { 
+      name, 
+      phone, 
+      available, 
+      address_complement, 
+      first_login,
+    }
+
+    if (coordinates && coordinates.length) {
+      const [longitude, latitude] = coordinates;
+
+      console.log('must upadte the coordinates');
+      
+      Object.assign(toUpdate, {
+        coordinates: st.setSRID(st.geomFromText(`Point(${longitude} ${latitude})`), 4326) 
+      })
+    }
 
     try {
       await db('users')
         .where('users.id', id)
-        .update({ name, phone, available, address_complement, first_login });
+        .update(toUpdate);
 
       return response.json({ message: 'Profile updated' });
     } catch(err) {
