@@ -47,7 +47,7 @@ module.exports = {
     }
 
     if (coordinates && coordinates.length) {
-      const [longitude, latitude] = coordinates;
+      const [latitude, longitude] = coordinates;
 
       console.log('must upadte the coordinates');
       

@@ -18,7 +18,7 @@ module.exports = {
       coordinates
     } = request.body;
 
-    const [longitude, latitude] = coordinates;
+    const [latitude, longitude] = coordinates;
 
     const emailExists = await db('users')
       .where('users.email', email)
