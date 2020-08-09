@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const routes = require('./routes');
 const dotenv = require('dotenv');
-const expressSwagger = require('express-swagger-generator')(app);
+// const expressSwagger = require('express-swagger-generator')(app);
 
 dotenv.config({path: __dirname+'/.env'});
 
