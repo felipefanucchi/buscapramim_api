@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "heroku-postbuild": "knex migrate:latest"
+    "heroku-postbuild": "npm install knex && knex migrate:latest"
   },
   "repository": {
     "type": "git",
