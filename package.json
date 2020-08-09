@@ -44,7 +44,7 @@
     "nodemailer-express-handlebars": "^4.0.0",
     "nodemon": "^2.0.4",
     "path": "^0.12.7",
-    "pg": "^6.4.2"
+    "pg": "^6.1.2"
   },
   "devDependencies": {
     "express-swagger-generator": "^1.1.17"
