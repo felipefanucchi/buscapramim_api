@@ -37,6 +37,6 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-expressSwagger(swaggerOptions);
+// expressSwagger(swaggerOptions);
 
 app.listen(process.env.API_PORT | 3333);
