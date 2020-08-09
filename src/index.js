@@ -39,4 +39,4 @@ app.use(routes);
 
 // expressSwagger(swaggerOptions);
 
-app.listen(process.env.API_PORT | 3333);
+app.listen(process.env.PORT || 3333);
