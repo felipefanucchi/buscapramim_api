@@ -40,7 +40,7 @@
     "knex": "^0.20.15",
     "knex-postgis": "^0.11.0",
     "knexnest": "^1.0.0",
-    "nodemailer": "^6.4.8",
+    "nodemailer": "^6.4.16",
     "nodemailer-express-handlebars": "^4.0.0",
     "nodemon": "^2.0.4",
     "path": "^0.12.7",
