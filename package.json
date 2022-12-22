@@ -36,7 +36,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi-phone-number": "^4.1.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "knex": "^0.20.15",
     "knex-postgis": "^0.11.0",
     "knexnest": "^1.0.0",
