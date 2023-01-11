@@ -37,7 +37,7 @@
     "express": "^4.17.1",
     "joi-phone-number": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.20.15",
+    "knex": "^2.4.0",
     "knex-postgis": "^0.11.0",
     "knexnest": "^1.0.0",
     "nodemailer": "^6.4.8",
